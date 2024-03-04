@@ -1,3 +1,27 @@
+body {
+  /* ... */
+  display: flex; /* Enable flexbox for the body element */
+  height: 650px; /* Set minimum height to viewport height */
+  justify-content: center; /* Center content along the main axis (vertically) */
+  align-items: center; /* Center content along the cross axis (horizontally) */
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  /* Styles for mobile devices */
+  body {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+.result {
+  border: 2px solid;
+  padding: 20px;
+  border-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+}
+
 .breed-list {
   list-style-type: none; /* Remove default bullet points */
   padding: 0;
@@ -6,4 +30,5 @@
 
 .breed-list li {
   margin-bottom: 5px; /* Add spacing between list items */
+  display: block;
 }

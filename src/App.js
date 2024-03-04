@@ -66,7 +66,7 @@ const App = () => {
   // }
 
   return (
-    <div>
+    <div className='result'>
       <h1>Pet DNA Scan Result:</h1>
       <input type="file" accept="image/*" onChange={handleImageUpload} />
       <label>
