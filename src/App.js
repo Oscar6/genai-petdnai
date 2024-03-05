@@ -5,6 +5,7 @@ import './App.css';
 const App = () => {
   const [responseText, setResponseText] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
 
@@ -23,8 +24,10 @@ const App = () => {
 
   const fetchData = async () => {
     try {
+      setIsSubmitting(true);
+
       // Convert the uploaded image to base64
-      const base64EncodedImage = uploadedImage.split(',')[1]; // assume data URL
+      const base64EncodedImage = uploadedImage.split(',')[1];
 
       // Create GoogleGenerativeAI instance with API key
       const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -32,11 +35,20 @@ const App = () => {
       const model = genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
 
       // Prepare prompt and image data
-      const prompt = `Identify the dog breed by the image, weight: ${weight} lbs, height: ${height} inches, provided and return a summary of the dog breed provided that is four sentences long. Return a list of four dog breeds that match it. Provide the match percentage for each dog.`;
+      const prompt = `Identify the dog breed by the image, weight: ${weight} lbs, height: ${height} inches, provided and return a summary of the dog breed provided that is four sentences long. 
+        Also, below the summary return the sentence "Here are four matching dog breeds:" followed by a numbered list of four dog breeds that match it. Provide an evenly distributed match percentage for each dog. 
+          Ex: 
+            1. Dog breed A(70%) 
+            2. Dog Breed B(20%) 
+            3. Dog Breed C(5%) 
+            4. Dog Breed D(5%)
+            
+        If the image provided does not match a dog, return only the following statement "Please only upload images of your pup."`;
+
       const image = {
         inlineData: {
           data: base64EncodedImage,
-          mimeType: 'image/jpeg', // update based on image format
+          mimeType: 'image/jpeg',
         },
       };
 
@@ -51,19 +63,12 @@ const App = () => {
 
       // Update state with parsed results
       setResponseText(responseText);
+      setIsSubmitting(false); // Reset submit state
     } catch (error) {
       console.error('Error fetching data:', error);
+      setIsSubmitting(false); // Reset submit state in case of error
     }
   };
-
-  // Function to parse model response (assuming JSON format)
-  // function parseGeminiResponse(response) {
-  //   const parsedData = JSON.parse(response);
-  //   return parsedData.map(item => ({
-  //     breed: item.breed,
-  //     percentage: item.percentage,
-  //   }));
-  // }
 
   return (
     <div className='result'>
@@ -77,7 +82,19 @@ const App = () => {
         Height (in):
         <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
       </label>
-      <button onClick={fetchData}>Submit</button>
+      <button onClick={fetchData} disabled={isSubmitting}>
+        {isSubmitting ? 'Submitting...' : 'Submit'}
+      </button>
+
+      {uploadedImage && (
+        <div className='imageArea'>
+          <img 
+            src={uploadedImage} 
+            alt="pet" 
+            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
+          />
+        </div>
+      )}
 
       {responseText.length > 0 && (
         <div>

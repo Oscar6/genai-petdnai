@@ -1,33 +1,37 @@
 body {
-  /* ... */
-  display: flex; /* Enable flexbox for the body */
-  min-height: 100vh; /* Set minimum height to viewport height */
-  justify-content: center; /* Center content along the main axis (vertically) */
-  align-items: center; /* Center content along the cross axis (horizontally) */
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
+.imageArea {
+  height: 300px;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
 .result {
-  border: 2px solid; /* Existing styles */
-  padding: 20px; /* Existing styles */
-  border-color: white; /* Existing styles */
-  border-radius: 10px; /* Existing styles */
-  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666); /* Existing styles */
-  
-  /* Additional styles for centering and fixing position */
-  position: fixed; /* Fix the element to the viewport */
-  top: 50%; /* Position vertically at 50% */
-  left: 50%; /* Position horizontally at 50% */
-  transform: translate(-50%, -50%); /* Center element based on position */
+  border: 2px solid;
+  padding: 20px;
+  border-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .breed-list {
-  list-style-type: none; /* Remove default bullet points */
   padding: 0;
   margin: 0;
 }
 
 .breed-list li {
-  margin-bottom: 5px; /* Add spacing between list items */
+  margin-bottom: 5px;
   display: block;
 }
