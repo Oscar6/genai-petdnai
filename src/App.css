@@ -1,5 +1,6 @@
 body {
   display: flex;
+  background-color: rgb(48, 81, 138);
   min-height: 100vh;
   justify-content: center;
   align-items: center;
@@ -17,7 +18,8 @@ body {
 .result {
   border: 2px solid;
   padding: 20px;
-  border-color: white;
+  background-color: rgba(255, 255, 255, 0.093);
+  border-color: rgba(171, 41, 41, 0);
   border-radius: 10px;
   box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
   position: fixed;
@@ -25,6 +27,50 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.resultHeader {
+  border: 2px solid;
+  padding: 20px;
+  background-color: white;
+  border-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+}
+
+.assets{
+  display: flex;
+}
+
+.imgUpload {
+  display: flex;
+  border: 2px solid;
+  background-color: white;
+  padding: 20px;
+  width: 180px;
+  border-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.sizeInputs {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+  background-color: white;
+  padding: 20px;
+  width: 150px;
+  border-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+  margin-bottom: 10px;
+}
+
+.sizeInputs label {
+  margin-bottom: 5px;
+}
+
 
 .breed-list {
   padding: 0;

@@ -72,25 +72,30 @@ const App = () => {
 
   return (
     <div className='result'>
-      <h1>Pet DNA Scan Result:</h1>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
-      <label>
-        Weight (lbs):
-        <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
-      </label>
-      <label>
-        Height (in):
-        <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
-      </label>
+      <h1 className='resultHeader'>Pet DNA Scan Result:</h1>
+      <div className='assets'>
+      <input className='imgUpload' type="file" accept="image/*" onChange={handleImageUpload} />
+      <div className='sizeInputs'>
+        <label>
+          Weight (lbs):
+          <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
+        </label>
+        <label>
+          Height (in):
+          <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
+        </label>
+      </div>
+      </div>
+      
       <button onClick={fetchData} disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Submit'}
       </button>
 
       {uploadedImage && (
         <div className='imageArea'>
-          <img 
-            src={uploadedImage} 
-            alt="pet" 
+          <img
+            src={uploadedImage}
+            alt="pet"
             style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
           />
         </div>
