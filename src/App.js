@@ -87,9 +87,11 @@ const App = () => {
       </div>
       </div>
       
-      <button onClick={fetchData} disabled={isSubmitting}>
-        {isSubmitting ? 'Submitting...' : 'Submit'}
-      </button>
+      {!isSubmitting && (
+        <button onClick={fetchData} disabled={isSubmitting}>
+          Submit
+        </button>
+      )}
 
       {uploadedImage && (
         <div className='imageArea'>
@@ -101,8 +103,10 @@ const App = () => {
         </div>
       )}
 
+      {isSubmitting && <p>Loading...</p>}
+
       {responseText.length > 0 && (
-        <div>
+        <div className='responseText'>
           {/* Split the text into paragraphs and render them */}
           {responseText.split('\n\n').map((paragraph, index) => (
             <div key={index}>
@@ -132,8 +136,6 @@ const App = () => {
       {responseText.length === 0 && responseText !== '' && (
         <p>No matching breeds found.</p>
       )}
-
-      {responseText === '' && <p>Loading...</p>}
     </div>
   );
 };
