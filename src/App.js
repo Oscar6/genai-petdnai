@@ -72,7 +72,7 @@ const App = () => {
 
   return (
     <div className='result'>
-      <h1 className='resultHeader'>Pet DNA Scan Result:</h1>
+      <h2 className='resultHeader'>Pet DNA Scan Result</h2>
       <div className='assets'>
       <input className='imgUpload' type="file" accept="image/*" onChange={handleImageUpload} />
       <div className='sizeInputs'>
