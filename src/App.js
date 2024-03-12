@@ -95,12 +95,14 @@ const App = () => {
 
       {uploadedImage && (
         <div className='imageArea'>
+        <div className="imageWrapper">
           <img
             src={uploadedImage}
             alt="pet"
-            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
+            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover', borderRadius: '8px' }}
           />
         </div>
+      </div>
       )}
 
       {isSubmitting && <p>Loading...</p>}
@@ -119,13 +121,14 @@ const App = () => {
                   {paragraph
                     .split('\n')
                     .slice(2) // remove first two lines
-                    .map((item, index) => (
-                      <li key={index}>
-                        {index + 1}. {item.split(' (')[0]} (
-                        {item.split(' (')[1].split(')')[0]}% )
-                        <br />
-                      </li>
-                    ))}
+                    .map((item, index) => {
+                      const [breed, percentage] = item.split(' (');
+                      return (
+                        <li key={index}>
+                          {index + 1}. {breed} ({percentage.replace(')', '')})
+                        </li>
+                      );
+                      })}
                 </ul>
               )}
             </div>
