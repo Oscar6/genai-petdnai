@@ -6,6 +6,7 @@ const App = () => {
   const [responseText, setResponseText] = useState('');
   const [uploadedImage, setUploadedImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
 
@@ -25,6 +26,7 @@ const App = () => {
   const fetchData = async () => {
     try {
       setIsSubmitting(true);
+      setIsLoading(true);
 
       // Convert the uploaded image to base64
       const base64EncodedImage = uploadedImage.split(',')[1];
@@ -36,12 +38,12 @@ const App = () => {
 
       // Prepare prompt and image data
       const prompt = `Identify the dog breed by the image, weight: ${weight} lbs, height: ${height} inches, provided and return a summary of the dog breed provided that is four sentences long. 
-        Also, below the summary return the sentence "Here are four matching dog breeds:" followed by a numbered list of four dog breeds that match it. Provide an evenly distributed match percentage for each dog. 
+        Also, below the summary return the sentence "Here are four possible matching dog breeds:" followed by a numbered list of four different dog breeds that match it. Do not include the indentified breed in the list. Provide an evenly distributed percentage for each dog so that total for the four listed breeds equals 100%. 
           Ex: 
-            1. Dog breed A(70%) 
-            2. Dog Breed B(20%) 
-            3. Dog Breed C(5%) 
-            4. Dog Breed D(5%)
+            1. Dog breed A(X%) 
+            2. Dog Breed B(X%) 
+            3. Dog Breed C(X%) 
+            4. Dog Breed D(X%)
             
         If the image provided does not match a dog, return only the following statement "Please only upload images of your pup."`;
 
@@ -63,30 +65,33 @@ const App = () => {
 
       // Update state with parsed results
       setResponseText(responseText);
-      setIsSubmitting(false); // Reset submit state
     } catch (error) {
       console.error('Error fetching data:', error);
-      setIsSubmitting(false); // Reset submit state in case of error
+      setIsSubmitting(false);
+    } finally {
+      setIsLoading(false); // Hide the "Loading..." message after the request completes
     }
   };
 
   return (
     <div className='result'>
-      <h2 className='resultHeader'>Pet DNAi</h2>
-      <div className='assets'>
-      <input className='imgUpload' type="file" accept="image/*" onChange={handleImageUpload} />
-      <div className='sizeInputs'>
-        <label>
-          Weight (lbs):
-          <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
-        </label>
-        <label>
-          Height (in):
-          <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
-        </label>
-      </div>
-      </div>
-      
+      <h2 className='resultHeader'>Pet Project</h2>
+      {!isSubmitting && (
+        <div className='assets'>
+          <input className='imgUpload' type="file" accept="image/*" onChange={handleImageUpload} />
+          <div className='sizeInputs'>
+            <label>
+              Weight (lbs):
+              <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
+            </label>
+            <label>
+              Height (in):
+              <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
+            </label>
+          </div>
+        </div>
+      )}
+
       {!isSubmitting && (
         <button onClick={fetchData} disabled={isSubmitting}>
           Submit
@@ -95,17 +100,17 @@ const App = () => {
 
       {uploadedImage && (
         <div className='imageArea'>
-        <div className="imageWrapper">
-          <img
-            src={uploadedImage}
-            alt="pet"
-            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover', borderRadius: '8px' }}
-          />
+          <div className="imageWrapper">
+            <img
+              src={uploadedImage}
+              alt="pet"
+              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover', borderRadius: '8px' }}
+            />
+          </div>
         </div>
-      </div>
       )}
 
-      {isSubmitting && <p>Loading...</p>}
+      {isLoading && <p>Loading...</p>}
 
       {responseText.length > 0 && (
         <div className='responseText'>
@@ -116,20 +121,22 @@ const App = () => {
 
               {/* Check if paragraph starts with specific text and render list */}
               {paragraph.startsWith('Here are four') && (
-                <ul className="breed-list">
-                  {/* Split the paragraph into individual breed items */}
-                  {paragraph
-                    .split('\n')
-                    .slice(2) // remove first two lines
-                    .map((item, index) => {
-                      const [breed, percentage] = item.split(' (');
-                      return (
-                        <li key={index}>
-                          {index + 1}. {breed} ({percentage.replace(')', '')})
-                        </li>
-                      );
+                <div>
+                  <ul className="breed-list">
+                    {/* Split the paragraph into individual breed items */}
+                    {paragraph
+                      .split('\n')
+                      .slice(2) // remove first two lines
+                      .map((item, index) => {
+                        const [breed, percentage] = item.split(' (');
+                        return (
+                          <li key={index}>
+                            {index + 1}. {breed} ({percentage.replace(')', '')})
+                          </li>
+                        );
                       })}
-                </ul>
+                  </ul>
+                </div>
               )}
             </div>
           ))}
