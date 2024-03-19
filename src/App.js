@@ -38,7 +38,7 @@ const App = () => {
 
       // Prepare prompt and image data
       const prompt = `Identify the dog breed by the image, weight: ${weight} lbs, height: ${height} inches, provided and return a summary of the dog breed provided that is four sentences long. 
-        Also, below the summary return the sentence "Here are four possible matching dog breeds:" followed by a numbered list of four different dog breeds that match it. Do not include the indentified breed in the list. Provide an evenly distributed percentage for each dog so that total for the four listed breeds equals 100%. 
+        Also, below the summary return the sentence "Here are four possible matching dog breeds:" followed by a numbered list of four different dog breeds that match it. Do not include the indentified breed in the list. Provide an evenly distributed percentage for each dog so that total for the four listed breeds always equals 100%. 
           Ex: 
             1. Dog breed A(X%) 
             2. Dog Breed B(X%) 
