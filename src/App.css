@@ -44,15 +44,22 @@ body {
 
 .imgUpload {
   display: flex;
+  justify-content: center;
+  align-items: center;
   border: 2px solid;
   background-color: white;
   padding: 20px;
-  width: 125px;
+  width: 150px;
   border-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
   margin-bottom: 10px;
   margin-right: 10px;
+  cursor: pointer;
+}
+
+.imgUpload:focus {
+  outline: none;
 }
 
 .imageArea {

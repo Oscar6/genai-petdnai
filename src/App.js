@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+
 import './App.css';
 
 const App = () => {
@@ -78,7 +81,10 @@ const App = () => {
       <h2 className='resultHeader'>Pet Project</h2>
       {!isSubmitting && (
         <div className='assets'>
-          <input className='imgUpload' type="file" accept="image/*" onChange={handleImageUpload} />
+          <button className='imgUpload' onClick={() => document.getElementById('fileInput').click()}>
+            <FontAwesomeIcon icon={faImage} size='7x' />
+          </button>
+          <input id="fileInput" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
           <div className='sizeInputs'>
             <label>
               Weight (lbs):
