@@ -1,6 +1,6 @@
 body {
   display: flex;
-  background-color: rgb(48, 81, 138);
+  background-color: white;
   min-height: 100vh;
   justify-content: center;
   align-items: center;
@@ -16,15 +16,16 @@ body {
 .result {
   border: 2px solid;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.093);
-  border-color: rgba(171, 41, 41, 0);
+  background-color: white;
+  border-color: rgba(234, 234, 234, 0.483);
   border-radius: 10px;
+  box-shadow: 3px 3px 3px rgba(190, 190, 190, 0.666);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 335px;
+  max-width: 320px;
   height: 80vh;
   overflow-y: auto;
 }
@@ -33,9 +34,9 @@ body {
   border: 2px solid;
   padding: 10px;
   background-color: white;
-  border-color: white;
+  border-color: rgba(234, 234, 234, 0.483);
   border-radius: 10px;
-  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+  box-shadow: 3px 3px 3px rgba(190, 190, 190, 0.666);
 }
 
 .assets{
@@ -47,12 +48,13 @@ body {
   justify-content: center;
   align-items: center;
   border: 2px solid;
+  color: black;
   background-color: white;
   padding: 20px;
   width: 150px;
-  border-color: white;
+  border-color: rgba(234, 234, 234, 0.483);
   border-radius: 10px;
-  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+  box-shadow: 3px 3px 3px rgba(190, 190, 190, 0.666);
   margin-bottom: 10px;
   margin-right: 10px;
   cursor: pointer;
@@ -63,12 +65,12 @@ body {
 }
 
 .imageArea {
-  background-color: white;
   height: 200px;
   width: 200px;
   border: 2px solid;
   border-radius: 100px;
-  border-color: white;
+  box-shadow: 3px 3px 3px rgba(190, 190, 190, 0.666);
+  border-color: rgba(234, 234, 234, 0.483);
   display: flex;
   align-items: center;
   margin: auto;
@@ -86,9 +88,9 @@ body {
   background-color: white;
   padding: 20px;
   width: 125px;
-  border-color: white;
+  border-color: rgba(234, 234, 234, 0.483);
   border-radius: 10px;
-  box-shadow: 0px 0px 9px rgba(114, 114, 114, 0.666);
+  box-shadow: 3px 3px 3px rgba(190, 190, 190, 0.666);
   margin-bottom: 10px;
 }
 
@@ -100,8 +102,22 @@ input {
   width: 50px;
 }
 
-button {
+.sizeInputs input[type="number"] {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.submit {
+  width: 100px;
+  height: 30px;
+  color: black;
+  font-size: 15px;
   margin-bottom: 10px;
+  border: 2px solid;
+  background-color: white;
+  border-color: rgba(234, 234, 234, 0.483);
+  border-radius: 8px;
+  box-shadow: 3px 3px 3px rgba(190, 190, 190, 0.666);
 }
 
 /* .responseText {
