@@ -12,6 +12,8 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
+  const [petName, setPetName] = useState('');
+  const [submittedPetName, setSubmittedPetName] = useState('');
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -76,16 +78,26 @@ const App = () => {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSubmittedPetName(petName);
+    fetchData();
+  };
+
   return (
     <div className='result'>
-      <h2 className='resultHeader'>Pet Project</h2>
+       <h2 className='resultHeader'>{submittedPetName ? `${submittedPetName}'s Results` : 'Pet Project'}</h2>
       {!isSubmitting && (
         <div className='assets'>
           <button className='imgUpload' onClick={() => document.getElementById('fileInput').click()}>
             <FontAwesomeIcon icon={faCamera} size='5x' />
           </button>
           <input id="fileInput" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
-          <div className='sizeInputs'>
+          <form className='sizeInputs' onSubmit={handleSubmit}>
+          <label>
+              Pet name:
+              <input type="text" value={petName} onChange={(e) => setPetName(e.target.value)} />
+            </label>
             <label>
               Weight (lbs):
               <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
@@ -94,14 +106,8 @@ const App = () => {
               Height (in):
               <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} />
             </label>
-          </div>
+            </form>
         </div>
-      )}
-
-      {!isSubmitting && (
-        <button className='submit' onClick={fetchData} disabled={isSubmitting}>
-          Submit
-        </button>
       )}
 
       {uploadedImage && (
@@ -114,6 +120,12 @@ const App = () => {
             />
           </div>
         </div>
+      )}
+
+      {!isSubmitting && (
+        <button className='submit' onClick={handleSubmit} disabled={isSubmitting}>
+          Submit
+        </button>
       )}
 
       {isLoading && <p>Loading...</p>}
