@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/genai-petdnai/static/css/main.e0ae3a76.css",
+    "main.js": "/genai-petdnai/static/js/main.d793ebdb.js",
+    "index.html": "/genai-petdnai/index.html",
+    "main.e0ae3a76.css.map": "/genai-petdnai/static/css/main.e0ae3a76.css.map",
+    "main.d793ebdb.js.map": "/genai-petdnai/static/js/main.d793ebdb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e0ae3a76.css",
+    "static/js/main.d793ebdb.js"
+  ]
+}
